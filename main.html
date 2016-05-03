@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script src="angular.min.js"></script>
+    <script src="angular-ui-router.js"></script>
+    <script src="script.js"></script>
+</head>
+<body ng-app="app">
+<div align="center">
+<table bgcolor="#f0f8ff" width="35%" height="100%">
+    <tr>
+        <td colspan="2">
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td>
+          <div ui-sref="login" align="center">Login</div>
+        </td>
+        <td>
+            <div ui-sref="signup" align="center">SignUp</div>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <br>
+            <hr>
+            <br>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <ui-view>
+            </ui-view>
+
+            <!login.html>
+            <script type="text/ng-template" id="login.html">
+               <div align="center">
+               <form name="myForm" novalidate>
+                 <input type="email" name="email" placeholder="Email" ng-model="email" required>
+                   <span style="color:orangered" ng-show="myForm.email.$dirty && myForm.email.$invalid">
+                      <span ng-show="myForm.email.$error.required">Email is required.</span>
+                      <span ng-show="myForm.email.$error.email">Invalid email address.</span>
+                   </span><br><br>
+                 <input type="password" name="password" placeholder="Password" ng-model="password" ng-minlength="5" required>
+                   <span style="color:orangered" ng-show="myForm.password.$dirty && myForm.password.$invalid">
+                   <span ng-show="myForm.password.$error.required">Password is required.</span>
+                      <span ng-show="myForm.password.$error.minlength">Password size atleast 5.</span>
+                      
+                   </span>
+                   <br><br><br>
+                   <button ui-sref="loginpg" ng-disabled="myForm.email.$pristine || myForm.password.$pristine || myForm.email.$dirty && myForm.email.$invalid || myForm.password.$dirty && myForm.password.$error.minlength">LOGIN</button> <br>
+                   <a href="#">Forget Password?</a>
+               </form>
+               </div>
+            </script>
+
+            <!signup.html>
+            <script type="text/ng-template" id="signup.html">
+                <div align="center">
+                <form name="myForm1" novalidate>
+                    <input type="text" ng-class="signup.greeting.msg" name="user" ng-pattern="/^[a-zA-Z]{1,8}$/" ng-model="signup.name.msg" placeholder="UserName" required>
+                    <span style="color:red" ng-show="myForm1.user.$dirty && myForm1.user.$invalid">
+                        <span ng-show="myForm1.user.$error.required">Username is required.</span>
+                        <span ng-show="myForm1.user.$error.pattern">Username should cont atleast 8 charcters.</span>
+                    </span>
+                    <br><br>
+                    <input type="email" name="semail" placeholder="Email" ng-model="semail" required>
+                   <span style="color:orangered" ng-show="myForm1.semail.$dirty && myForm1.semail.$invalid">
+                      <span ng-show="myForm1.semail.$error.required">Email is required.</span>
+                      <span ng-show="myForm1.semail.$error.email">Invalid email address.</span>
+                   </span><br><br>
+                    <input type="password" name="spassword" placeholder="Password" ng-model="spassword" required>
+                   <span style="color:orangered" ng-show="myForm1.spassword.$dirty">
+                      <span ng-show="myForm1.spassword.$error.required">Password is required.</span>
+                   </span>
+                    <br><br>
+                    <input type="password" name="scpassword" placeholder="Confirm Password" ng-model="scpassword" required>
+                   <span style="color:orangered" ng-show="myForm1.scpassword.$dirty">
+                      <span ng-show="myForm1.scpassword.$error.required">Password is required.</span>
+                   </span>
+
+                    <br><br><br>
+                    <button ui-sref="signuppg" ng-disabled="myForm1.user.$pristine ||myForm1.semail.$pristine || myForm1.spassword.$pristine || myForm1.scpassword.$pristine || myForm1.semail.$dirty && myForm1.semail.$invalid || myForm1.user.$dirty && myForm1.user.$error.pattern">SIGNUP</button> <br>
+                </form>
+                </div>
+            </script>
+
+            <!loginpg.html>
+            <script type="text/ng-template" id="loginpg.html">
+                <div align="center">welcome</div>
+            </script>
+
+            <!signuppg.html>
+            <script type="text/ng-template" id="signuppg.html">
+                <div align="center">Welcome {{signuppg.greeting.msg}}</div>
+            </script>
+
+        </td>
+    </tr>
+</table>
+</div>
+</body>
+</html>
